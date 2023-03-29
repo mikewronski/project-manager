@@ -9,6 +9,7 @@
         Status: <%= @project.status %>
       </p>
 
+        <%= link_to "Add comment", new_comment_path(project: @project) %> |
         <%= link_to "Edit this project", edit_project_path(@project) %> |
         <%= link_to "Back to projects", projects_path %>
 
@@ -17,3 +18,25 @@
 
   </div>
 </div>
+
+
+<% @project.comments.each do |comment| %>
+  <div class="card">
+    <div class="card-body">
+      <p>
+        <%= comment.user.email %> commented at <%= comment.created_at %>
+        <%= comment.message %>
+      </p>
+    </div>
+  </div>
+<% end %>
+
+<% @project.project_status_histories.each do |status_history| %>
+  <div class="card">
+    <div class="card-body">
+      <p>
+        <%= status_history.user.email %> updated status to <%= status_history.status %> at <%= status_history.created_at %>
+      </p>
+    </div>
+  </div>
+<% end %>

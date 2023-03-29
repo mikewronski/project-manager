@@ -73,6 +73,6 @@ class ProjectsController < ApplicationController
     end
 
     def handle_status_change
-      ProjectStatusHistory.create project: @project, user: current_user, status: @project.status
+      ProjectStatusHistory.create! project: @project, user: current_user, status: @project.status
     end
 end

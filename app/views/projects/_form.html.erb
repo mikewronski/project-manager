@@ -9,7 +9,7 @@
 
       <div class="mb-3">
         <%= f.label :status, { class: "form-label"} %>
-        <%= f.select :status, options_for_select(Project::STATUSES), {}, { class: "form-select" } %>
+        <%= f.select :status, options_for_select(Project::STATUSES, selected: project.status ), { }, { class: "form-select" } %>
       </div>
 
       <%= f.submit "Submit", class: "btn btn-primary" %>
