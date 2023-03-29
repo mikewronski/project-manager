@@ -1,0 +1,2 @@
+class ProjectStatusHistory < ApplicationRecord
+end
