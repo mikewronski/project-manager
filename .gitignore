@@ -40,3 +40,4 @@
 /node_modules
 .idea/project-manager.iml
 .idea/workspace.xml
+yarn-error.log

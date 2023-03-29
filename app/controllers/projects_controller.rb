@@ -37,7 +37,11 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
     respond_to do |format|
+      status = @project.status
       if @project.update(project_params)
+        if status != @project.status
+          handle_status_change
+        end
         format.html { redirect_to project_url(@project), notice: "Project was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -66,5 +70,9 @@ class ProjectsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def project_params
       params.require(:project).permit(:name, :status)
+    end
+
+    def handle_status_change
+      ProjectStatusHistory.create project: @project, user: current_user, status: @project.status
     end
 end
