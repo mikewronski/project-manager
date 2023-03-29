@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    @project_id = params[:project]
   end
 
 
@@ -9,6 +10,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
+    @project_id = @comment.project_id
 
     respond_to do |format|
       if @comment.save

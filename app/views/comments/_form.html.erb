@@ -1,7 +1,19 @@
 <%= form_with(model: comment) do |f| %>
   <div class="card">
     <div class="card-body">
-      <%= f.hidden_field :project_id, value: params[:project] %>
+      <% if comment.errors.any? %>
+        <div style="color: red">
+          <p><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</p>
+
+          <ul>
+            <% comment.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= f.hidden_field :project_id, value: @project_id %>
 
       <div class="mb-3">
         <%= f.label :message, { class: "form-label"} %>

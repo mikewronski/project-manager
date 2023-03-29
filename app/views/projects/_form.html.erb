@@ -1,6 +1,17 @@
 <%= form_with(model: project) do |f| %>
   <div class="card">
     <div class="card-body">
+      <% if project.errors.any? %>
+        <div style="color: red">
+          <p><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</p>
+
+          <ul>
+            <% project.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
       <div class="mb-3">
         <%= f.label :name, { class: "form-label"} %>
